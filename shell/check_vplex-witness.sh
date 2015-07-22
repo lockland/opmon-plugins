@@ -2,15 +2,18 @@
 ############################################################################################################################
 # check_vplex-witness.sh
 #
-# Version    : 1.4.4
+# Version    : 1.5
 # Developer  : Sidney Souza
 # E-mail     : sidney.souza@opservices.com.br
 #
+# Revision:
+# 1.5	2015-22-07	Sidney Souza
+#	Fixed test command because it not testing regex correctly in bash version 4.1
 # Description: Used to monitoring EMC vplex's Objects
 ############################################################################################################################
 
 # Constante
-readonly VERSION=1.4.4
+readonly VERSION=1.5
 
 function _usage(){
 	echo -e "Usage: $(basename $0) -H < IP VPLEX > -O < Object > -M < Mode > \n\t-U < user > -P < password > [-v][-V][-h]"
@@ -116,7 +119,7 @@ function _getDataObject(){
 # @params:      String $2, regexp utilizada na validação
 ############################################################################################################################
 function _validateParam(){
-    if [[ ! "$1" =~ "$2" ]]; then
+    if [[ ! "$1" =~ $2 ]]; then
     	_help
     fi
 }
